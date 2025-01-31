@@ -16,17 +16,22 @@
         grid-template-areas:
         "header" "education" "skills" "languages" "other";
         --left-margin: 40px;
-    }
-    #header.specific {
-        grid-template-columns: 1fr;
-        grid-template-areas:
+
+        & #header.specific {
+            grid-template-columns: 1fr;
+            grid-template-areas:
             "name"
             "details"
             "pitch"
-        ;
-    }
-    #languages {
-        margin-left: var(--left-margin);
+            ;
+        }
+        /* single-column on narrow screens */
+        & .one-rest {
+            grid-template-columns: 1fr;
+        }
+        & #languages {
+            margin-left: var(--left-margin);
+        }
     }
 }
 
