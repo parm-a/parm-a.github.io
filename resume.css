@@ -1,215 +1,215 @@
-@media print {
-    @page {
-        margin: 0;
-    }
-    /* for a more specific selector, use body.specific */
-    body.specific {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-        font-size: 90%;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    /* for a more specific selector, use body.specific */
-    body.specific {
-        grid-template-areas:
-        "header" "education" "skills" "languages" "other";
-        --left-margin: 40px;
-    }
-    #header.specific {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "name"
-            "details"
-            "pitch"
-        ;
-    }
-    #languages {
-        margin-left: var(--left-margin);
-    }
-}
-
-/* ================= */
-body {
-    font-family: Raleway, sans-serif;
-    margin: 1em 2em;
-    padding-top: 1em;
-    --red-headers: #980004;
-    --left-margin: 60px;
-}
-
-
-body {
-    display: grid;
-    grid-template-areas:
-        "header header"
-        "education education"
-        "skills languages"
-        "other other";
-    #header { grid-area: header; }
-    #education { grid-area: education; }
-    #skills { grid-area: skills; }
-    #languages { grid-area: languages; }
-    #other { grid-area: other; }
-
-    grid-column-gap: 20px;
-    grid-row-gap: 30px;
-}
-
-#header {
-    display: grid;
-    grid-template-columns: 55% 40%;
-    grid-template-areas:
-        "name details"
-        "pitch pitch"
-    ;
-
-    #name { grid-area: name; }
-    #details { grid-area: details; }
-    #pitch { grid-area: pitch; }
-
-    #name {
-        margin-left: var(--left-margin);
-    }
-
-    #details {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        &>div {
-            margin-bottom: 0.3em;
-        }
-        & span.spacer {
-            width: 10px;
-            display: inline-block;
-        }
-    }
-    #pitch {
-        display: flex;
-        justify-content: center;
-        margin: 1em 0em 0em 0em;
-        font-style: italic;
-        font-size: 115%;
-        font-weight: 600;
-    }
-
-}
-
-/* one-rest has 2 columns, the left one takes the minimal space for the contents */
-/* and some space between the 2 columns */
-.one-rest {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    /* not too close to the right margin */
-    :nth-child(even) {
-        margin-right: 1.5em;
-    }
-}
-
-.formation {
-    padding-left: var(--left-margin);
-    .date {
-        display: flex;
-        justify-content: flex-end;
-        font-style: italic;
-        padding-right: 1.5em;
-    }
-
-    &>:nth-child(even)>:last-child {
-        margin-bottom: 0.8em;
-    }
-}
-
-/* ================= same for the bottom part: 1/4 */
-.one-rest.personal{
-    :nth-child(odd) {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-}
-
-#skills {
-    padding-left: var(--left-margin);
-}
-.personal {
-    padding-left: var(--left-margin);
-    & :nth-child(odd) {
-        text-align: right;
-        padding-right: 0.8em;
-    }
-    & * {
-        margin-bottom: 0.4em 0em;
-    }
-}
-
-/* ================= */
-
-.title {
-    font-size: 1.4em;
-    font-style: italic;
-    text-align: center;
-    margin-bottom: 0.5em;
-    color: var(--red-headers);
-    font-weight: 600;
-}
-
-.subtitle{
-    font-size: 1.2em;
-    font-weight: 500;
-    margin-bottom: 0.5em;
-}
-
-#name {
-    font-size: 1.8em;
-    margin-left: var(--left-margin);
-    margin-bottom: 0.5em;
-    font-weight:500;
-}
-
-.date {
-    font-weight: 500;
-    padding-top:5px;
-}
-.libelle{
-    font-size: 1.3em;
-    font-weight: 600;
-    margin-bottom: 0.3em;
-}
-.school {
-    font-size: 120%;
-    margin-bottom: 0.5em;
-    font-style: italic;
-}
-
-hr {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    height: 1px;
-    margin-bottom: 2x;
-    color: var(--red-headers);
-    background-color: var(--red-headers);
-}
-
-.minus::before {
-    content: ' - '
-}
-ul.leftline {
-    border-left: 1px solid var(--red-headers);
-    list-style-type: circle;
-    padding-bottom: 0em;
-    margin: 0.4em 0em 0.5em 0em;
-}
-
-
-.larger {
-    font-weight: 600;
-    font-size: 110%;
-}
-
-.personal.one-rest {
-    gap: 0.5em;
-}
+@media print {
+    @page {
+        margin: 0;
+    }
+    /* for a more specific selector, use body.specific */
+    body.specific {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        font-size: 90%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    /* for a more specific selector, use body.specific */
+    body.specific {
+        grid-template-areas:
+        "header" "education" "skills" "languages" "other";
+        --left-margin: 40px;
+    }
+    #header.specific {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "name"
+            "details"
+            "pitch"
+        ;
+    }
+    #languages {
+        margin-left: var(--left-margin);
+    }
+}
+
+/* ================= */
+body {
+    font-family: Raleway, sans-serif;
+    margin: 1em 2em;
+    padding-top: 1em;
+    --red-headers: #980004;
+    --left-margin: 60px;
+}
+
+
+body {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "education education"
+        "skills languages"
+        "other other";
+    #header { grid-area: header; }
+    #education { grid-area: education; }
+    #skills { grid-area: skills; }
+    #languages { grid-area: languages; }
+    #other { grid-area: other; }
+
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+}
+
+#header {
+    display: grid;
+    grid-template-columns: 55% 40%;
+    grid-template-areas:
+        "name details"
+        "pitch pitch"
+    ;
+
+    #name { grid-area: name; }
+    #details { grid-area: details; }
+    #pitch { grid-area: pitch; }
+
+    #name {
+        margin-left: var(--left-margin);
+    }
+
+    #details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        &>div {
+            margin-bottom: 0.3em;
+        }
+        & span.spacer {
+            width: 10px;
+            display: inline-block;
+        }
+    }
+    #pitch {
+        display: flex;
+        justify-content: center;
+        margin: 1em 0em 0em 0em;
+        font-style: italic;
+        font-size: 115%;
+        font-weight: 600;
+    }
+
+}
+
+/* one-rest has 2 columns, the left one takes the minimal space for the contents */
+/* and some space between the 2 columns */
+.one-rest {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    /* not too close to the right margin */
+    :nth-child(even) {
+        margin-right: 1.5em;
+    }
+}
+
+.formation {
+    padding-left: var(--left-margin);
+    .date {
+        display: flex;
+        justify-content: flex-end;
+        font-style: italic;
+        padding-right: 1.5em;
+    }
+
+    &>:nth-child(even)>:last-child {
+        margin-bottom: 0.8em;
+    }
+}
+
+/* ================= same for the bottom part: 1/4 */
+.one-rest.personal{
+    :nth-child(odd) {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+
+#skills {
+    padding-left: var(--left-margin);
+}
+.personal {
+    padding-left: var(--left-margin);
+    & :nth-child(odd) {
+        text-align: right;
+        padding-right: 0.8em;
+    }
+    & * {
+        margin-bottom: 0.4em 0em;
+    }
+}
+
+/* ================= */
+
+.title {
+    font-size: 1.4em;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0.5em;
+    color: var(--red-headers);
+    font-weight: 600;
+}
+
+.subtitle{
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+
+#name {
+    font-size: 1.8em;
+    margin-left: var(--left-margin);
+    margin-bottom: 0.5em;
+    font-weight:500;
+}
+
+.date {
+    font-weight: 500;
+    padding-top:5px;
+}
+.libelle{
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 0.3em;
+}
+.school {
+    font-size: 120%;
+    margin-bottom: 0.5em;
+    font-style: italic;
+}
+
+hr {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    height: 1px;
+    margin-bottom: 2x;
+    color: var(--red-headers);
+    background-color: var(--red-headers);
+}
+
+.minus::before {
+    content: ' - '
+}
+ul.leftline {
+    border-left: 1px solid var(--red-headers);
+    list-style-type: circle;
+    padding-bottom: 0em;
+    margin: 0.4em 0em 0.5em 0em;
+}
+
+
+.larger {
+    font-weight: 600;
+    font-size: 110%;
+}
+
+.personal.one-rest {
+    gap: 0.5em;
+}
