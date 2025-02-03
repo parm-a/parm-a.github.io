@@ -50,6 +50,17 @@
         & #languages {
             margin-left: var(--left-margin);
         }
+
+        & .personal {
+            grid-template-areas: 
+            "mh"
+            "mb"
+            "sh"
+            "sb"
+            "ch"
+            "cb";
+            grid-template-columns: 1fr;
+        }
     }
 }
 
