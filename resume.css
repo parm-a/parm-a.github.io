@@ -4,19 +4,26 @@
     }
     /* for a more specific selector, use body.specific */
     body.specific {
+        #header {
+            margin-bottom: 10px;
+        }
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
         font-size: 90%;
-        row-gap: 0px;
+        row-gap: 15px;
 
         & .one-rest {
             grid-template-columns: 100px 1fr;
-            padding-left: 0px;
+            padding-left: 20px;
         }
 
-        & .one-rest.personal {
-            /* grid-template-columns: 1fr; */
-            padding-left: 0px;
+        & .personal {
+            grid-template-columns: 70px 80px 195px 150px 1fr;
+            padding-left: 20px;
+
+            & span {
+                font-size: 95%;
+            }
         }
     }
 }
@@ -156,13 +163,19 @@ body {
 }
 .personal {
     padding-left: var(--left-margin);
-    & :nth-child(odd) {
-        text-align: right;
-        padding-right: 0.8em;
-    }
-    & * {
-        margin-bottom: 0.4em 0em;
-    }
+    display: grid;
+    grid-template-areas:
+        "mh mb mb mb mb"
+        "sh sh sb ch cb";
+    grid-template-columns: 100px 100px 200px 200px 1fr;
+    align-items: baseline;
+
+    & #music-header { grid-area: mh; }
+    & #music-body { grid-area: mb; }
+    & #sport-header { grid-area: sh; }
+    & #sport-body { grid-area: sb; }
+    & #creative-header { grid-area: ch; }
+    & #creative-body { grid-area: cb; }
 }
 
 /* ================= */
