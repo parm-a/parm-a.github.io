@@ -7,6 +7,17 @@
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
         font-size: 90%;
+        row-gap: 0px;
+
+        & .one-rest {
+            grid-template-columns: 100px 1fr;
+            padding-left: 0px;
+        }
+
+        & .one-rest.personal {
+            /* grid-template-columns: 1fr; */
+            padding-left: 0px;
+        }
     }
 }
 
@@ -111,6 +122,11 @@ body {
         margin-right: 1.5em;
     }
 }
+
+.one-rest.formation{
+    grid-template-columns: 150px 1fr;
+}
+
 
 .formation {
     padding-left: var(--left-margin);
