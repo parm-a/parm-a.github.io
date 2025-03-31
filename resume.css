@@ -169,9 +169,20 @@ body {
     }
 }
 
-#skills {
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Ensures space is distributed */
+    gap: 20px; /* Adds some space between columns */
+}
+
+#skills, #languages {
+    width: 50%; /* Each takes half of the container */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
     padding-left: var(--left-margin);
 }
+
+
 .personal {
     padding-left: var(--left-margin);
     display: grid;
