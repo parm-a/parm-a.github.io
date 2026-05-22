@@ -32,7 +32,12 @@
     /* for a more specific selector, use body.specific */
     body.specific {
         grid-template-areas:
-        "header" "education" "skills" "languages" "other";
+        "header"
+        "experience"
+        "education"
+        "skills"
+        "languages"
+        "other";
         --left-margin: 40px;
 
         & #header.specific {
@@ -47,7 +52,9 @@
         & .one-rest {
             grid-template-columns: 1fr;
         }
-        & #languages {
+        & #skills, #languages {
+            width: 100%;
+            padding-left: 0;
             margin-left: var(--left-margin);
         }
 
@@ -64,8 +71,29 @@
     }
 }
 
-/* ================= */
+
 body {
+    display: grid;
+    /* FORCE the two main layout columns to stretch equally across the screen */
+    grid-template-columns: 1fr 1fr; 
+    
+    grid-template-areas:
+        "header header"
+        "experience experience"
+        "education education"
+        "skills languages"
+        "other other";
+
+    #header { grid-area: header; }
+    #experience { grid-area: experience; } 
+    #education { grid-area: education; }
+    #skills { grid-area: skills; }
+    #languages { grid-area: languages; }
+    #other { grid-area: other; } /* Ensures #other maps to "other other" rows */
+
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+    
     font-family: Raleway, sans-serif;
     margin: 1em 2em;
     padding-top: 1em;
@@ -73,23 +101,6 @@ body {
     --left-margin: 60px;
 }
 
-
-body {
-    display: grid;
-    grid-template-areas:
-        "header header"
-        "education education"
-        "skills languages"
-        "other other";
-    #header { grid-area: header; }
-    #education { grid-area: education; }
-    #skills { grid-area: skills; }
-    #languages { grid-area: languages; }
-    #other { grid-area: other; }
-
-    grid-column-gap: 20px;
-    grid-row-gap: 30px;
-}
 
 #header {
     display: grid;
@@ -130,6 +141,13 @@ body {
 
 }
 
+#other {
+    grid-area: other;
+    width: 100%;        /* Forces the container to take full width */
+    grid-column: 1 / -1; /* Dual-safety rule ensuring it breaks out of the 50% column constraint */
+}
+
+
 /* one-rest has 2 columns, the left one takes the minimal space for the contents */
 /* and some space between the 2 columns */
 .one-rest {
@@ -141,13 +159,18 @@ body {
     }
 }
 
-.one-rest.formation{
+
+.one-rest.profession,
+.one-rest.formation {
     grid-template-columns: 150px 1fr;
+    display: grid; /* Just making sure display: grid is explicitly set */
 }
 
-
+/* Combine the section rules */
+.profession,
 .formation {
     padding-left: var(--left-margin);
+
     .date {
         display: flex;
         justify-content: flex-end;
@@ -161,8 +184,8 @@ body {
 }
 
 /* ================= same for the bottom part: 1/4 */
-.one-rest.personal{
-    :nth-child(odd) {
+.one-rest.personal {
+    & :nth-child(odd) {
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -177,19 +200,27 @@ body {
 }
 
 #skills, #languages {
-    width: 50%; /* Each takes half of the container */
+    /* width: 50%; Each takes half of the container */
     box-sizing: border-box; /* Ensures padding doesn't affect width */
     padding-left: var(--left-margin);
 }
 
 
+/* Update your .personal class to use flexible column tracks */
 .personal {
     padding-left: var(--left-margin);
     display: grid;
     grid-template-areas:
         "mh mb mb mb mb"
         "sh sh sb ch cb";
-    grid-template-columns: 100px 100px 200px 200px 1fr;
+    
+    /* OLD: grid-template-columns: 100px 100px 200px 200px 1fr; */
+    /* NEW: Let headers shrink to their text size, and distribute body spaces evenly */
+    grid-template-columns: max-content max-content 1fr 1fr 1fr;
+    
+    /* Adds a little breathing room between your headers and text blocks */
+    column-gap: 1.5em; 
+    row-gap: 0.8em;
     align-items: baseline;
 
     & #music-header { grid-area: mh; }
@@ -269,3 +300,4 @@ ul.leftline {
 .personal.one-rest {
     gap: 0.5em;
 }
+
