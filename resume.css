@@ -1,303 +1,350 @@
-@media print {
-    @page {
-        margin: 0;
-    }
-    /* for a more specific selector, use body.specific */
-    body.specific {
-        #header {
-            margin-bottom: 10px;
-        }
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-        font-size: 90%;
-        row-gap: 15px;
+/* =========================================================================
+   CV Aaron Parmentelat — HTML/CSS reproduction of the AltaCV LaTeX layout
+   ========================================================================= */
 
-        & .one-rest {
-            grid-template-columns: 100px 1fr;
-            padding-left: 20px;
-        }
-
-        & .personal {
-            grid-template-columns: 70px 80px 195px 150px 1fr;
-            padding-left: 20px;
-
-            & span {
-                font-size: 95%;
-            }
-        }
-    }
+:root {
+    --accent: #8a1a1a;          /* maroon used for section titles / orgs */
+    --accent-muted: #9a4a4a;    /* markers (calendar / pin) */
+    --ink: #262626;             /* main text */
+    --frame: #333333;           /* page border */
+    --bullet-grey: #9a9a9a;     /* bullets in the right column */
+    --gap: 26px;                /* gap between the two columns */
 }
 
-@media only screen and (max-width: 768px) {
-    /* for a more specific selector, use body.specific */
-    body.specific {
-        grid-template-areas:
-        "header"
-        "experience"
-        "education"
-        "skills"
-        "languages"
-        "other";
-        --left-margin: 40px;
-
-        & #header.specific {
-            grid-template-columns: 1fr;
-            grid-template-areas:
-            "name"
-            "details"
-            "pitch"
-            ;
-        }
-        /* single-column on narrow screens */
-        & .one-rest {
-            grid-template-columns: 1fr;
-        }
-        & #skills, #languages {
-            width: 100%;
-            padding-left: 0;
-            margin-left: var(--left-margin);
-        }
-
-        & .personal {
-            grid-template-areas: 
-            "mh"
-            "mb"
-            "sh"
-            "sb"
-            "ch"
-            "cb";
-            grid-template-columns: 1fr;
-        }
-    }
+* {
+    box-sizing: border-box;
 }
-
 
 body {
-    display: grid;
-    /* FORCE the two main layout columns to stretch equally across the screen */
-    grid-template-columns: 1fr 1fr; 
-    
-    grid-template-areas:
-        "header header"
-        "experience experience"
-        "education education"
-        "skills languages"
-        "other other";
-
-    #header { grid-area: header; }
-    #experience { grid-area: experience; } 
-    #education { grid-area: education; }
-    #skills { grid-area: skills; }
-    #languages { grid-area: languages; }
-    #other { grid-area: other; } /* Ensures #other maps to "other other" rows */
-
-    grid-column-gap: 20px;
-    grid-row-gap: 30px;
-    
-    font-family: Raleway, sans-serif;
-    margin: 1em 2em;
-    padding-top: 1em;
-    --red-headers: #980004;
-    --left-margin: 60px;
+    font-family: Lato, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0;
+    background: #e9e9e9;
+    padding: 24px 0;
 }
 
-
-#header {
-    display: grid;
-    grid-template-columns: 55% 40%;
-    grid-template-areas:
-        "name details"
-        "pitch pitch"
-    ;
-
-    #name { grid-area: name; }
-    #details { grid-area: details; }
-    #pitch { grid-area: pitch; }
-
-    #name {
-        margin-left: var(--left-margin);
-    }
-
-    #details {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        &>div {
-            margin-bottom: 0.3em;
-        }
-        & span.spacer {
-            width: 10px;
-            display: inline-block;
-        }
-    }
-    #pitch {
-        display: flex;
-        justify-content: center;
-        margin: 1em 0em 0em 0em;
-        font-style: italic;
-        font-size: 115%;
-        font-weight: 600;
-    }
-
+/* the page itself — mimics the A4 sheet with its thin frame */
+.page {
+    width: 210mm;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 14mm 15mm 12mm;
+    border: 1.3px solid var(--frame);
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.18);
 }
 
-#other {
-    grid-area: other;
-    width: 100%;        /* Forces the container to take full width */
-    grid-column: 1 / -1; /* Dual-safety rule ensuring it breaks out of the 50% column constraint */
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-
-/* one-rest has 2 columns, the left one takes the minimal space for the contents */
-/* and some space between the 2 columns */
-.one-rest {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    /* not too close to the right margin */
-    :nth-child(even) {
-        margin-right: 1.5em;
-    }
+/* acronyms carry a tooltip via their title attribute */
+abbr[title] {
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+    cursor: help;
 }
 
-
-.one-rest.profession,
-.one-rest.formation {
-    grid-template-columns: 150px 1fr;
-    display: grid; /* Just making sure display: grid is explicitly set */
+/* =========================================================== section titles */
+.section {
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.2px;
+    margin: 0 0 8px 0;
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--accent);
+    line-height: 1.05;
 }
 
-/* Combine the section rules */
-.profession,
-.formation {
-    padding-left: var(--left-margin);
-
-    .date {
-        display: flex;
-        justify-content: flex-end;
-        font-style: italic;
-        padding-right: 1.5em;
-    }
-
-    &>:nth-child(even)>:last-child {
-        margin-bottom: 0.8em;
-    }
+/* =========================================================== header */
+.header {
+    margin-bottom: 14px;
 }
 
-/* ================= same for the bottom part: 1/4 */
-.one-rest.personal {
-    & :nth-child(odd) {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
+.name {
+    font-weight: 400;
+    font-size: 44px;
+    letter-spacing: 0.5px;
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+    color: #1a1a1a;
 }
 
+.contact {
+    font-size: 12px;
+    line-height: 1.5;
+}
 
-.container {
+.contact-row {
     display: flex;
-    justify-content: space-between; /* Ensures space is distributed */
-    gap: 20px; /* Adds some space between columns */
+    flex-wrap: wrap;
+    gap: 4px 22px;
 }
 
-#skills, #languages {
-    /* width: 50%; Each takes half of the container */
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
-    padding-left: var(--left-margin);
+.contact i {
+    color: var(--accent);
+    margin-right: 2px;
 }
 
-
-/* Update your .personal class to use flexible column tracks */
-.personal {
-    padding-left: var(--left-margin);
-    display: grid;
-    grid-template-areas:
-        "mh mb mb mb mb"
-        "sh sh sb ch cb";
-    
-    /* OLD: grid-template-columns: 100px 100px 200px 200px 1fr; */
-    /* NEW: Let headers shrink to their text size, and distribute body spaces evenly */
-    grid-template-columns: max-content max-content 1fr 1fr 1fr;
-    
-    /* Adds a little breathing room between your headers and text blocks */
-    column-gap: 1.5em; 
-    row-gap: 0.8em;
-    align-items: baseline;
-
-    & #music-header { grid-area: mh; }
-    & #music-body { grid-area: mb; }
-    & #sport-header { grid-area: sh; }
-    & #sport-body { grid-area: sb; }
-    & #creative-header { grid-area: ch; }
-    & #creative-body { grid-area: cb; }
-}
-
-/* ================= */
-
-.title {
-    font-size: 1.4em;
+.contact .hint {
     font-style: italic;
-    text-align: center;
-    margin-bottom: 0.5em;
-    color: var(--red-headers);
-    font-weight: 600;
-}
-
-.subtitle{
-    font-size: 1.2em;
-    font-weight: 500;
-    margin-bottom: 0.5em;
-}
-
-#name {
-    font-size: 1.8em;
-    margin-left: var(--left-margin);
-    margin-bottom: 0.5em;
-    font-weight:500;
-}
-
-.date {
-    font-weight: 500;
-    padding-top:5px;
-}
-.libelle{
-    font-size: 1.3em;
-    font-weight: 600;
-    margin-bottom: 0.3em;
-}
-.school {
-    font-size: 120%;
-    margin-bottom: 0.5em;
-    font-style: italic;
-}
-
-hr {
-    width: 90%;
+    color: #555;
     margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    height: 1px;
-    margin-bottom: 2x;
-    color: var(--red-headers);
-    background-color: var(--red-headers);
 }
 
-.minus::before {
-    content: ' - '
-}
-ul.leftline {
-    border-left: 1px solid var(--red-headers);
-    list-style-type: circle;
-    padding-bottom: 0em;
-    margin: 0.4em 0em 0.5em 0em;
+.contact .hint i {
+    color: #555;
 }
 
-
-.larger {
-    font-weight: 600;
-    font-size: 110%;
+/* =========================================================== à propos */
+.about {
+    margin-bottom: 18px;
 }
 
-.personal.one-rest {
-    gap: 0.5em;
+.about p {
+    margin: 0;
+    text-align: justify;
 }
 
+/* =========================================================== two columns */
+.columns {
+    display: grid;
+    grid-template-columns: 33% 1fr;
+    gap: var(--gap);
+}
+
+.col-left section,
+.col-right section {
+    margin-bottom: 18px;
+}
+
+.col-left section:last-child,
+.col-right section:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================================== skills (left) */
+.skill {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.skill .marker {
+    color: var(--accent);
+    font-size: 15px;
+    margin-top: 2px;
+    text-align: center;
+}
+
+.skill-title {
+    font-weight: 700;
+}
+
+/* =========================================================== publications */
+.pub-head {
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.pub-head .marker {
+    color: var(--accent);
+    margin-right: 3px;
+}
+
+/* =========================================================== left-column lists */
+ul.dots {
+    list-style: none;
+    margin: 4px 0 0 0;
+    padding: 0;
+}
+
+ul.dots li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 6px;
+}
+
+ul.dots li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+/* =========================================================== cv events (right) */
+.cvevent {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.cvevent:last-child {
+    border-bottom: none;
+}
+
+.ev-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.ev-org {
+    color: var(--accent);
+    font-weight: 700;
+    margin: 1px 0 4px 0;
+}
+
+.ev-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.ev-meta .marker {
+    color: var(--accent-muted);
+    margin-right: 4px;
+}
+
+.cvevent ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cvevent ul li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 4px;
+    text-align: justify;
+}
+
+.cvevent ul li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 0.5em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--bullet-grey);
+}
+
+/* =========================================================== narrow screens */
+@media only screen and (max-width: 720px) {
+    body {
+        padding: 0;
+        background: #fff;
+    }
+
+    .page {
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        padding: 20px 16px;
+    }
+
+    .columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .name {
+        font-size: 32px;
+    }
+}
+
+/* =========================================================== print / PDF
+   The whole CV is meant to fit on a single A4 page (like the LaTeX
+   original). CSS grid does not fragment across pages in Chrome, so the
+   header + columns MUST fit together on one page — hence the compacting. */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        background: #fff;
+        padding: 0;
+        font-size: 11.2px;
+        line-height: 1.4;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        /* thin inner frame, like the LaTeX version */
+        outline: 1.2px solid var(--frame);
+        outline-offset: -7mm;
+        padding: 12mm 15mm;
+    }
+
+    .header {
+        margin-bottom: 11px;
+    }
+
+    .name {
+        font-size: 37px;
+        margin-bottom: 5px;
+    }
+
+    .contact {
+        font-size: 10.4px;
+    }
+
+    .about {
+        margin-bottom: 15px;
+    }
+
+    .columns {
+        gap: 24px;
+    }
+
+    .col-left section,
+    .col-right section {
+        margin-bottom: 16px;
+        break-inside: avoid;
+    }
+
+    .section {
+        font-size: 17.5px;
+        margin-bottom: 7px;
+    }
+
+    .ev-title {
+        font-size: 14px;
+    }
+
+    .cvevent {
+        margin-bottom: 13px;
+        padding-bottom: 11px;
+        break-inside: avoid;
+    }
+
+    .cvevent ul li,
+    ul.dots li {
+        margin-bottom: 5px;
+    }
+
+    .skill {
+        margin-bottom: 10px;
+    }
+}
