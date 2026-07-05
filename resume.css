@@ -149,6 +149,7 @@ abbr[title] {
 
 .skill-title {
     font-weight: 700;
+    font-size: 15px;
 }
 
 /* =========================================================== publications */
@@ -213,7 +214,7 @@ ul.dots li::before {
 .ev-meta {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 5px;
 }
 
@@ -335,6 +336,10 @@ ul.dots li::before {
 
     .ev-title {
         font-size: 14px;
+    }
+
+    .ev-meta {
+        font-size: 12px;
     }
 
     .cvevent {
