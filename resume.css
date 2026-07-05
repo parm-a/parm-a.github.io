@@ -19,7 +19,9 @@ body {
     font-family: Lato, "Helvetica Neue", Arial, sans-serif;
     color: var(--ink);
     font-size: 13px;
+    /* font-weight: 300;          Lato Light, as in the AltaCV LaTeX body */
     line-height: 1.4;
+    /* letter-spacing: -0.2px;    mimics LaTeX microtype's tighter tracking */
     margin: 0;
     background: #e9e9e9;
     padding: 24px 0;
@@ -104,6 +106,8 @@ abbr[title] {
 /* =========================================================== à propos */
 .about {
     margin-bottom: 18px;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .about p {
@@ -114,7 +118,7 @@ abbr[title] {
 /* =========================================================== two columns */
 .columns {
     display: grid;
-    grid-template-columns: 33% 1fr;
+    grid-template-columns: 28% 1fr;
     gap: var(--gap);
 }
 
@@ -346,5 +350,11 @@ ul.dots li::before {
 
     .skill {
         margin-bottom: 10px;
+    }
+
+    /* pull FORMATION up to reclaim the gap above it, so the last event
+       on the page clears the bottom frame */
+    #formation {
+        margin-top: -8px;
     }
 }
