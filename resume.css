@@ -357,4 +357,10 @@ ul.dots li::before {
     #formation {
         margin-top: -8px;
     }
+
+    /* the tooltip hint and the PDF download link are meaningless on paper */
+    .contact .hint,
+    .contact .pdf-link {
+        display: none;
+    }
 }
